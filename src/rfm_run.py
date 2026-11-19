@@ -22,9 +22,6 @@ import numpy as np
 import pandas as pd
 import matplotlib
 
-# ============ 唯一需要你改的开关 ============
-# False = 不弹窗，直接把图存到 output_dir（推荐，跑得快、不卡）
-# True  = 每张图弹窗显示（PyCharm 里看图方便，但要手动关窗口）
 SHOW_PLOTS = False
 
 if not SHOW_PLOTS:
@@ -35,14 +32,12 @@ warnings.filterwarnings('ignore')
 plt.rcParams['font.sans-serif'] = ['SimHei', 'Microsoft YaHei']
 plt.rcParams['axes.unicode_minus'] = False
 
-# ============ 路径：相对仓库根目录，换机器可直接跑 ============
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = os.path.dirname(BASE_DIR)
 input_path = os.path.join(ROOT_DIR, 'data', 'user_personalized_features.csv')
 output_dir = os.path.join(ROOT_DIR, 'outputs')
 os.makedirs(output_dir, exist_ok=True)
 
-# 环境自检：跑挂了先看这三行，确认 PyCharm 用的是装了 pandas 的解释器
 print(f"[环境] 解释器: {sys.executable}")
 print(f"[环境] pandas {pd.__version__} / numpy {np.__version__} / matplotlib {matplotlib.__version__}")
 print(f"[路径] 数据: {input_path}")
@@ -407,6 +402,5 @@ def calculate_roi(df, output_dir):
 
 calculate_roi(df, output_dir)
 
-# 导出明细，方便写简历时引用
 df.to_csv(f'{output_dir}/user_segments_result.csv', index=False, encoding='utf-8-sig')
 print(f"\n[OK] 全部完成，图表与明细已保存至: {output_dir}")
